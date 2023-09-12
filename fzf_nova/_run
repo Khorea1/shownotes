@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Get a list of executable files in the PATH
+IFS=':' read -ra paths <<< "$PATH"
+executable_files=()
+
+for path in "${paths[@]}"; do
+  while IFS= read -r -d '' file; do
+    if [[ -x "$file" ]]; then
+      executable_files+=("$(basename "$file")")
+    fi
+  done < <(find "$path" -type f -print0 2>/dev/null)
+done
+
+# Use FZF to select an application
+selected_app=$(printf '%s\n' "${executable_files[@]}" | fzf --header="Select application to launch from PATH:" --exact)
+
+# Launch the selected application
+if [[ -n "$selected_app" ]]; then
+  exec "$selected_app"
+fi
+

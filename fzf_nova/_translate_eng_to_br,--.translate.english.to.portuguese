@@ -4,9 +4,8 @@
 set -o vi
 while true
 do
-  read -rep ">>> Translate Text: " INPUT
+  read -rep ">>> Translate English to Brazilian(lol): " INPUT
   history -s "$INPUT"
-  trans :en "$INPUT"
+  trans en:pt "$INPUT"
   printf "\n"
 done
-
