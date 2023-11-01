@@ -5,7 +5,7 @@
 # DEMO:   https://www.youtube.com/watch?v=Zew0mgJwAh8
 # DEPEND: fzf sed coreutils findutils (xsel or tmux)
 
-selected="$(find ~/.multisnippet/ -type f | sort | fzf -e -i --reverse --delimiter / --with-nth -1 --preview 'cat {}')"
+selected="$(fd . ~/Documents/asciiarts/ | sort | fzf -e -i --reverse --delimiter / --with-nth -1 --preview 'cat {}')"
 [ -z "$selected" ] && exit
 
 # add to tmux and X11 clipboard
